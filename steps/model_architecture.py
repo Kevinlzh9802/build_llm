@@ -50,13 +50,13 @@ class DummyLayerNorm(nn.Module):
         return x
     
 
-tokenizer = tiktoken.get_encoding("gpt2")
-batch = []
-txt1 = "Every effort moves you"
-txt2 = "Every day holds a"
-batch.append(torch.tensor(tokenizer.encode(txt1)))
-batch.append(torch.tensor(tokenizer.encode(txt2)))
-batch = torch.stack(batch, dim=0)
+# tokenizer = tiktoken.get_encoding("gpt2")
+# batch = []
+# txt1 = "Every effort moves you"
+# txt2 = "Every day holds a"
+# batch.append(torch.tensor(tokenizer.encode(txt1)))
+# batch.append(torch.tensor(tokenizer.encode(txt2)))
+# batch = torch.stack(batch, dim=0)
 # print(batch)
 
 # torch.manual_seed(123)
@@ -167,10 +167,10 @@ class ExampleDeepNeuralNetwork(nn.Module):
                 x = layer_output
         return x
 
-layer_sizes = [3, 3, 3, 3, 3, 1]
-sample_input = torch.tensor([[1., 0., -1.]])
-torch.manual_seed(123)
-model_without_shortcut = ExampleDeepNeuralNetwork(layer_sizes, use_shortcut=False)
+# layer_sizes = [3, 3, 3, 3, 3, 1]
+# sample_input = torch.tensor([[1., 0., -1.]])
+# torch.manual_seed(123)
+# model_without_shortcut = ExampleDeepNeuralNetwork(layer_sizes, use_shortcut=False)
 
 def print_gradients(model, x):
     output = model(x)
@@ -250,14 +250,14 @@ class GPTModel(nn.Module):
         return logits
     
 
-torch.manual_seed(123)
-model = GPTModel(GPT_CONFIG_124M)
-out = model(batch)
+# torch.manual_seed(123)
+# model = GPTModel(GPT_CONFIG_124M)
+# out = model(batch)
 # print("Input batch:\n", batch)
 # print("\nOutput shape:", out.shape)
 # print(out)
 
-total_params = sum(p.numel() for p in model.parameters())
+# total_params = sum(p.numel() for p in model.parameters())
 # print(f"Total number of parameters: {total_params:,}")
 
 # print("Token embedding layer shape:", model.tok_emb.weight.shape)
@@ -279,8 +279,8 @@ total_params = sum(p.numel() for p in model.parameters())
 # print(f"Number of trainable parameters in the attention layers: {attn_params:,}")
 # print(f"Number of trainable parameters in the feed-forward layers: {ff_params:,}")
 
-total_size_bytes = total_params * 4
-total_size_mb = total_size_bytes / (1024 * 1024)
+# total_size_bytes = total_params * 4
+# total_size_mb = total_size_bytes / (1024 * 1024)
 # print(f"Total size of the model: {total_size_mb:.2f} MB")
 
 
@@ -338,18 +338,18 @@ def generate_text_simple(model, idx, max_new_tokens, context_size):
         idx = torch.cat((idx, idx_next), dim=1)
     return idx
 
-torch.manual_seed(123)
-start_context = "Hello, I am"
-encoded = tokenizer.encode(start_context)
+# torch.manual_seed(123)
+# start_context = "Hello, I am"
+# encoded = tokenizer.encode(start_context)
 # print("encoded:", encoded)
-encoded_tensor = torch.tensor(encoded).unsqueeze(0)
+# encoded_tensor = torch.tensor(encoded).unsqueeze(0)
 # print("encoded_tensor.shape:", encoded_tensor.shape)
 
 
-model.eval()
-out = generate_text_simple(model, encoded_tensor, 6, context_size=GPT_CONFIG_124M["context_length"])
+# model.eval()
+# out = generate_text_simple(model, encoded_tensor, 6, context_size=GPT_CONFIG_124M["context_length"])
 # print("Output:", out)
 # print("Output length:", len(out[0]))
 
-decoded_text = tokenizer.decode(out.squeeze(0).tolist())
-print(decoded_text)
+# decoded_text = tokenizer.decode(out.squeeze(0).tolist())
+# print(decoded_text)
