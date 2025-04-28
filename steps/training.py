@@ -417,13 +417,13 @@ torch.manual_seed(123)
 # filename = url.split('/')[-1]
 # urllib.request.urlretrieve(url, filename)
 
-settings, params = download_and_load_gpt2(model_size="1558M", models_dir="gpt2")
+settings, params = download_and_load_gpt2(model_size="124M", models_dir="gpt2")
 
-# print("Settings:", settings)
-# print("Parameter dictionary keys:", params.keys())
+print("Settings:", settings)
+print("Parameter dictionary keys:", params.keys())
 
-# print(params["wte"])
-# print("Token embedding weight tensor dimensions:", params["wte"].shape)
+print(params["wte"])
+print("Token embedding weight tensor dimensions:", params["wte"].shape)
 
 model_configs = {
     "gpt2-small (124M)": {"emb_dim": 768, "n_layers": 12, "n_heads": 12},
@@ -504,23 +504,23 @@ def load_weights_into_gpt(gpt, params):
 # print("Validation loss:", val_loss)
 
 # Excercise 5.6
-model_name = "gpt2-xl (1558M)"
-NEW_CONFIG = GPT_CONFIG_124M.copy()
-NEW_CONFIG.update(model_configs[model_name])
-NEW_CONFIG.update({"context_length": 1024})
-NEW_CONFIG.update({"qkv_bias": True})
+# model_name = "gpt2-xl (1558M)"
+# NEW_CONFIG = GPT_CONFIG_124M.copy()
+# NEW_CONFIG.update(model_configs[model_name])
+# NEW_CONFIG.update({"context_length": 1024})
+# NEW_CONFIG.update({"qkv_bias": True})
 
-gpt = GPTModel(NEW_CONFIG)
-gpt.eval()
-load_weights_into_gpt(gpt, params)
-gpt.to(device)
+# gpt = GPTModel(NEW_CONFIG)
+# gpt.eval()
+# load_weights_into_gpt(gpt, params)
+# gpt.to(device)
 
-token_ids = generate(
-    model=gpt,
-    idx=text_to_token_ids("Every effort moves you", tokenizer).to(device),
-    max_new_tokens=25,
-    context_size=NEW_CONFIG["context_length"],
-    top_k=50,
-    temperature=1.5
-)
-print("Output text:\n", token_ids_to_text(token_ids, tokenizer))
+# token_ids = generate(
+#     model=gpt,
+#     idx=text_to_token_ids("Every effort moves you", tokenizer).to(device),
+#     max_new_tokens=25,
+#     context_size=NEW_CONFIG["context_length"],
+#     top_k=50,
+#     temperature=1.5
+# )
+# print("Output text:\n", token_ids_to_text(token_ids, tokenizer))

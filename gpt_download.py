@@ -12,7 +12,7 @@ import json
 import numpy as np
 import tensorflow as tf
 from tqdm import tqdm
-
+print(tf.__version__)
 
 def download_and_load_gpt2(model_size, models_dir):
     # Validate model size
@@ -39,7 +39,7 @@ def download_and_load_gpt2(model_size, models_dir):
         download_file(file_url, file_path, backup_url)
 
     # Load settings and params
-    tf_ckpt_path = tf.train.latest_checkpoint(model_dir)
+    tf_ckpt_path = tf.compat.v1.train.latest_checkpoint(model_dir)
     settings = json.load(open(os.path.join(model_dir, "hparams.json"), "r", encoding="utf-8"))
     params = load_gpt2_params_from_tf_ckpt(tf_ckpt_path, settings)
 
